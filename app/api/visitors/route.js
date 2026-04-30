@@ -1,22 +1,19 @@
-// app/api/visitors/route.js
-// ─────────────────────────────────────────────────────────
-// GET /api/visitors
-// Returns all visitor cards, newest first.
-// ─────────────────────────────────────────────────────────
-
-import { NextResponse } from 'next/server';
-import { supabase }     from '@/lib/supabase';
+import { createClient } from "@supabase/supabase-js";
 
 export async function GET() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
   const { data, error } = await supabase
-    .from('visitors')
-    .select('id, name, card_color, signature, created_at')
-    .order('created_at', { ascending: false });
+    .from("visitors")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) {
-    console.error('Error fetching visitors:', error.message);
-    return NextResponse.json({ error: 'Failed to load visitors.' }, { status: 500 });
+    return Response.json({ error: error.message });
   }
 
-  return NextResponse.json({ visitors: data });
+  return Response.json({ visitors: data });
 }
