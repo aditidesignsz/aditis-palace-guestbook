@@ -13,4 +13,5 @@ export async function GET() {
   }
 
   return NextResponse.json({ visitors: data });
+
 }
