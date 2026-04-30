@@ -1,15 +1,16 @@
-import { supabase } from "@/lib/supabase"
+import { NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
 export async function GET() {
 
   const { data, error } = await supabase
     .from("visitors")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: false });
 
   if (error) {
-    return Response.json({ error: error.message })
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return Response.json({ visitors: data })
+  return NextResponse.json({ visitors: data });
 }
