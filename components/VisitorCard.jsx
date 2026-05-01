@@ -1,201 +1,141 @@
-// components/VisitorCard.jsx
-// ─────────────────────────────────────────────────────────
-// This is the card component shown in the gallery.
-//
-// ✦ HOW TO SWAP IN YOUR FIGMA DESIGNS LATER ✦
-// Each color theme has its own clearly labeled section below.
-// When your Figma assets are ready, you can:
-//   1. Export each card design as an image (PNG/SVG) from Figma
-//   2. Place the exported files in /public/cards/
-//   3. Replace the placeholder <div> for that color with:
-//        <Image src="/cards/card-pink.png" alt="..." fill />
-//      using Next.js <Image> component.
-//   OR if you export as a React/JSX component from Figma:
-//      just replace the entire PLACEHOLDER CARD block with your component.
-// ─────────────────────────────────────────────────────────
-
 'use client';
 
-// ── Color definitions ──────────────────────────────────────
-// These match your 4 Figma card themes.
-// Change these hex values here if your Figma colors differ.
 const CARD_THEMES = {
-  blue: {
-    background: '#2C8C9C',
-    label:      'Blue',
-  },
-  green: {
-    background: '#2F7D49',
-    label:      'Green',
-  },
-  orange: {
-    background: '#C8753A',
-    label:      'Orange',
-  },
-  pink: {
-    background: '#C45C74',
-    label:      'Pink',
-  },
+  blue:   { bg: '#2B7BB5', image: '/cards/card-blue.png' },
+  green:  { bg: '#2F7D49', image: '/cards/card-green.png' },
+  orange: { bg: '#C8753A', image: '/cards/card-orange.png' },
+  pink:   { bg: '#C45C74', image: '/cards/card-pink.png' },
 };
 
-// ── Helper: format date nicely ─────────────────────────────
 function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day:   'numeric',
-    year:  'numeric',
-  });
+  const d = new Date(dateString);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yy = String(d.getFullYear()).slice(-2);
+  return dd + '/' + mm + '/' + yy;
 }
 
-// ── Main card component ────────────────────────────────────
 export default function VisitorCard({ visitor }) {
   const { name, card_color, signature, created_at } = visitor;
   const theme = CARD_THEMES[card_color] || CARD_THEMES.pink;
 
   return (
-    // ┌─────────────────────────────────────────────────────┐
-    // │  PLACEHOLDER CARD                                   │
-    // │  Replace everything inside this outer <div> with    │
-    // │  your Figma design when ready.                      │
-    // │  Keep the outer <article> wrapper — it handles      │
-    // │  sizing and hover animation for the grid.           │
-    // └─────────────────────────────────────────────────────┘
     <article className="card-wrapper">
-      <div
-        className="card-placeholder"
-        style={{ backgroundColor: theme.background }}
-      >
-        {/* ── Card header ── */}
-        <div className="card-header">
-          <span className="card-title">Aditi's Palace</span>
-        </div>
+      <div className="card" style={{ backgroundImage: 'url(' + theme.image + ')', backgroundColor: theme.bg }}>
 
-        {/* ── Guest name ── */}
-        <div className="card-field">
-          <span className="card-label">GUEST</span>
-          <span className="card-value card-name">{name}</span>
-        </div>
+        <div className="card-title">Aditi's palace</div>
 
-        {/* ── Date ── */}
-        <div className="card-field">
-          <span className="card-label">SIGNED ON</span>
-          <span className="card-value">{formatDate(created_at)}</span>
-        </div>
-
-        {/* ── Signature ── */}
-        <div className="card-sig-area">
-          {signature && (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              src={signature}
-              alt={`${name}'s signature`}
-              className="card-sig-image"
-            />
-          )}
-          <div className="card-sig-line">
-            <span>X</span>
-            <hr />
+        <div className="card-body">
+          <div className="card-field">
+            <span className="lbl">GUEST</span>
+            <span className="val val-name">{name.toUpperCase()}</span>
+          </div>
+          <div className="card-field">
+            <span className="lbl">ISSUED ON</span>
+            <span className="val">{formatDate(created_at)}</span>
+          </div>
+          <div className="sign-row">
+            <span className="lbl">SIGN</span>
+            <span className="sign-x">X</span>
+            {signature && (
+              <img src={signature} alt="signature" className="sig-img" />
+            )}
+            <div className="sig-line" />
           </div>
         </div>
+
       </div>
 
-      {/* ── Styles scoped to this component ── */}
       <style jsx>{`
         .card-wrapper {
-          border-radius: 14px;
+          border-radius: 18px;
           overflow: hidden;
+          aspect-ratio: 362 / 235;
           transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
         .card-wrapper:hover {
           transform: translateY(-4px);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.18);
         }
-
-        /* ─── PLACEHOLDER CARD STYLES ───────────────────────
-           These styles are only for the placeholder design.
-           Delete or ignore them when you swap in Figma assets. */
-        .card-placeholder {
-          padding: 22px 20px 16px;
-          min-height: 200px;
+        .card {
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          position: relative;
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          position: relative;
-          /* Subtle dot-grid texture */
-          background-image: radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.15) 1px,
-            transparent 1px
-          );
-          background-size: 12px 12px;
+          padding: 5% 6%;
+          box-sizing: border-box;
         }
-
-        .card-header {
-          margin-bottom: 4px;
-        }
-
         .card-title {
           font-family: var(--font-serif);
           font-style: italic;
-          font-size: 16px;
-          color: rgba(255, 255, 255, 0.92);
+          font-size: clamp(13px, 3vw, 20px);
+          color: #fff;
+          text-align: center;
+          width: 55%;
+          margin-bottom: auto;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.15);
         }
-
+        .card-body {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          width: 54%;
+        }
         .card-field {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 1px;
+          margin-bottom: 3px;
         }
-
-        .card-label {
-          font-size: 8px;
+        .lbl {
+          font-family: var(--font-mono);
+          font-size: clamp(6px, 1vw, 8px);
           letter-spacing: 1.2px;
-          color: rgba(255, 255, 255, 0.55);
+          color: rgba(255,255,255,0.6);
           text-transform: uppercase;
         }
-
-        .card-value {
-          font-size: 13px;
+        .val {
+          font-family: var(--font-mono);
+          font-size: clamp(10px, 1.8vw, 14px);
           color: #fff;
           font-weight: 600;
+          letter-spacing: 0.3px;
         }
-
-        .card-name {
-          font-size: 15px;
-          word-break: break-word;
+        .val-name {
+          font-size: clamp(11px, 2vw, 15px);
         }
-
-        .card-sig-area {
-          margin-top: auto;
-          position: relative;
-          height: 70px;
-        }
-
-        .card-sig-image {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          object-position: center bottom;
-        }
-
-        .card-sig-line {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
+        .sign-row {
           display: flex;
           align-items: center;
-          gap: 6px;
-          font-size: 10px;
-          color: rgba(255, 255, 255, 0.45);
+          gap: 4px;
+          margin-top: 4%;
+          position: relative;
+          height: 22px;
         }
-
-        .card-sig-line hr {
-          flex: 1;
-          border: none;
-          border-top: 1px solid rgba(255, 255, 255, 0.3);
-          margin: 0;
+        .sign-x {
+          font-family: var(--font-mono);
+          font-size: clamp(8px, 1.2vw, 11px);
+          color: rgba(255,255,255,0.75);
+        }
+        .sig-img {
+          position: absolute;
+          left: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 65%;
+          height: 40px;
+          object-fit: contain;
+          object-position: left center;
+        }
+        .sig-line {
+          position: absolute;
+          bottom: 0;
+          left: 22px;
+          right: 0;
+          border-bottom: 1px solid rgba(255,255,255,0.35);
         }
       `}</style>
     </article>
