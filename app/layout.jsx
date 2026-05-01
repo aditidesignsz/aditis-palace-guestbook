@@ -1,34 +1,30 @@
 // app/layout.jsx
-// ─────────────────────────────────────────────────────────
-// Root layout — wraps every page.
-// Fonts and global CSS are loaded here.
-// ─────────────────────────────────────────────────────────
 
-import { Platypi, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-// ── Fonts ──────────────────────────────────────────────
-const platypi = Platypi({
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const spaceMono = Space_Mono({
   subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-mono",
   display: "swap",
 });
 
-// ── Metadata ────────────────────────────────────────────
 export const metadata = {
   title: "Aditi's Palace Guestbook",
-  description: "Sign the guestbook and leave your mark on Aditi's portfolio.",
+  description: "Sign the guestbook and leave your mark.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${platypi.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${spaceMono.variable}`}>
       <body>{children}</body>
     </html>
   );
