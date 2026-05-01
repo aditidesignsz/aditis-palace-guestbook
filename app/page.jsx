@@ -1,29 +1,21 @@
-// app/page.jsx
-// ─────────────────────────────────────────────────────────
-// PAGE 1 — Guestbook Gallery
-// Shows all visitor cards in a grid.
-// This is the first page visitors see.
-// ─────────────────────────────────────────────────────────
-
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link                    from 'next/link';
-import VisitorCard             from '@/components/VisitorCard';
+import Link from 'next/link';
+import VisitorCard from '@/components/VisitorCard';
 
 export default function GalleryPage() {
   const [visitors, setVisitors] = useState([]);
-  const [status,   setStatus]   = useState('loading'); // 'loading' | 'success' | 'error'
+  const [status, setStatus] = useState('loading');
 
-  // ── Fetch cards from the API ──────────────────────────
   useEffect(() => {
     async function fetchVisitors() {
       try {
-        const res = await fetch('/api/visitors', { cache: 'no-store' })
+        const res = await fetch(`/api/visitors?t=${Date.now()}`, {
+          cache: 'no-store',
+        });
         const json = await res.json();
-
         if (!res.ok) throw new Error(json.error || 'Failed to load.');
-
         setVisitors(json.visitors);
         setStatus('success');
       } catch (err) {
@@ -31,14 +23,11 @@ export default function GalleryPage() {
         setStatus('error');
       }
     }
-
     fetchVisitors();
   }, []);
 
   return (
     <main className="page-container">
-
-      {/* ── Header ──────────────────────────────────────── */}
       <header className="gallery-header">
         <div className="gallery-header-text">
           <h1 className="page-heading">Aditi's Palace<br />Guestbook</h1>
@@ -48,47 +37,32 @@ export default function GalleryPage() {
               : 'Leave your mark ✦'}
           </p>
         </div>
-
-        {/* Sign the guestbook button */}
         <Link href="/sign" className="btn-primary">
           Sign the Guestbook ✦
         </Link>
       </header>
 
-      {/* ── Cards grid ──────────────────────────────────── */}
       <section className="cards-grid" aria-label="Visitor cards">
-
-        {/* Loading state */}
         {status === 'loading' && (
           <div className="state-message">Loading cards…</div>
         )}
-
-        {/* Error state */}
         {status === 'error' && (
           <div className="state-message">
-            Couldn't load the guestbook.<br />
-            Please refresh the page.
+            Couldn't load the guestbook.<br />Please refresh the page.
           </div>
         )}
-
-        {/* Empty state */}
         {status === 'success' && visitors.length === 0 && (
           <div className="state-message">
-            No visitors yet.<br />
-            Be the first to sign! ✦
+            No visitors yet.<br />Be the first to sign! ✦
           </div>
         )}
-
-        {/* Cards */}
         {status === 'success' &&
           visitors.map((visitor) => (
             <VisitorCard key={visitor.id} visitor={visitor} />
           ))
         }
-
       </section>
 
-      {/* ── Styles ──────────────────────────────────────── */}
       <style jsx>{`
         .gallery-header {
           display: flex;
@@ -98,7 +72,6 @@ export default function GalleryPage() {
           gap: 24px;
           margin-bottom: 36px;
         }
-
         .gallery-header-text {
           display: flex;
           flex-direction: column;
