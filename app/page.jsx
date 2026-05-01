@@ -11,8 +11,9 @@ export default function GalleryPage() {
   useEffect(() => {
     async function fetchVisitors() {
       try {
-        const res = await fetch('/api/visitors?t=' + Date.now(), {
-          cache: 'no-store',
+       const res = await fetch('/api/visitors', {
+  cache: "no-store"
+});
         });
         const json = await res.json();
         if (!res.ok) throw new Error(json.error || 'Failed to load.');
