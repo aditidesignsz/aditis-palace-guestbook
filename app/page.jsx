@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { createClient } from '@supabase/supabase-js';
 import VisitorCard from '@/components/VisitorCard';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 export default function GalleryPage() {
   const [visitors, setVisitors] = useState([]);
@@ -10,18 +16,18 @@ export default function GalleryPage() {
 
   useEffect(() => {
     async function fetchVisitors() {
-      try {
-        const res = await fetch('/api/visitors?t=' + Date.now(), {
-          cache: 'no-store',
-        });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json.error || 'Failed to load.');
-        setVisitors(json.visitors);
-        setStatus('success');
-      } catch (err) {
-        console.error(err);
+      const { data, error } = await supabase
+        .from('visitors')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error(error);
         setStatus('error');
+        return;
       }
+      setVisitors(data);
+      setStatus('success');
     }
     fetchVisitors();
   }, []);
