@@ -11,7 +11,7 @@ export default function GalleryPage() {
   useEffect(() => {
     async function fetchVisitors() {
       try {
-        const res = await fetch(`/api/visitors?t=${Date.now()}`, {
+        const res = await fetch('/api/visitors?t=' + Date.now(), {
           cache: 'no-store',
         });
         const json = await res.json();
