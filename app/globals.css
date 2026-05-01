@@ -4,15 +4,20 @@
    Uses CSS variables so it's easy to update colours and fonts.
    ───────────────────────────────────────────────────────── */
 
+
 /* ── Reset ──────────────────────────────────────────────── */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+
 /* ── Design tokens ───────────────────────────────────────── */
+
 :root {
+
   /* Background */
   --color-bg:       #EDEAE3;
   --color-bg-card:  #E4E0D8;
@@ -28,34 +33,41 @@
   --color-green:    #2F7D49;
   --color-orange:   #C8753A;
   --color-pink:     #C45C74;
+  --color-yellow:   #D8B742;
 
   /* Fonts */
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono:  'Space Mono', 'Courier New', monospace;
+  --font-serif: 'Platypi', Georgia, serif;
+  --font-mono:  'Geist Mono', 'Courier New', monospace;
 
   /* Shape */
-  --radius:     14px;
+  --radius:     24px;
   --radius-sm:  8px;
 }
 
+
 /* ── Base ────────────────────────────────────────────────── */
+
 html, body {
   height: 100%;
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Typography helpers ──────────────────────────────────── */
+
+/* ── Typography helpers ─────────────────────────────────── */
+
 .serif {
   font-family: var(--font-serif);
   font-style: italic;
 }
 
+
 /* ── Shared layout wrapper ──────────────────────────────── */
+
 .page-container {
   min-height: 100vh;
   max-width: 1100px;
@@ -63,71 +75,104 @@ html, body {
   padding: 48px 32px 80px;
 }
 
-/* ── Page heading ────────────────────────────────────────── */
+
+/* ── Page heading ───────────────────────────────────────── */
+
 .page-heading {
   font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(26px, 5vw, 40px);
-  font-weight: 700;
+  font-size: clamp(34px, 5vw, 46px);
+  font-weight: 600;
   letter-spacing: -0.5px;
   color: var(--color-text);
   line-height: 1.15;
+  white-space: nowrap;
 }
 
-/* ── Subheading / helper text ────────────────────────────── */
+
+/* ── Subheading / helper text ───────────────────────────── */
+
 .page-sub {
-  font-size: 11px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 1px;
   color: var(--color-muted);
 }
 
+
 /* ── Primary button ─────────────────────────────────────── */
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
   padding: 13px 30px;
+
   border-radius: 40px;
   border: none;
+
   background: var(--color-text);
   color: #fff;
+
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.2px;
+
   cursor: pointer;
   text-decoration: none;
+
   transition: opacity 0.15s ease, transform 0.12s ease;
+
   white-space: nowrap;
 }
-.btn-primary:hover  { opacity: 0.82; }
-.btn-primary:active { transform: scale(0.97); }
+
+.btn-primary:hover {
+  opacity: 0.82;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
 .btn-primary:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* ── Outlined button ─────────────────────────────────────── */
+
+/* ── Outlined button ───────────────────────────────────── */
+
 .btn-outline {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+
   padding: 11px 22px;
+
   border-radius: 40px;
   border: 1.5px solid var(--color-text);
+
   background: transparent;
   color: var(--color-text);
+
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.8px;
+
   cursor: pointer;
   text-decoration: none;
+
   transition: background 0.13s ease;
 }
-.btn-outline:hover { background: var(--color-bg-card); }
+
+.btn-outline:hover {
+  background: var(--color-bg-card);
+}
+
 
 /* ── Label + input pair ─────────────────────────────────── */
+
 .field-group {
   display: flex;
   flex-direction: column;
@@ -135,74 +180,108 @@ html, body {
 }
 
 .field-label {
-  font-size: 9.5px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.6px;
   color: var(--color-muted);
 }
 
 .field-input {
   width: 100%;
+
   padding: 12px 14px;
+
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--color-border);
+
   background: #fff;
+
   font-family: var(--font-mono);
   font-size: 14px;
   color: var(--color-text);
+
   outline: none;
+
   transition: border-color 0.13s;
 }
+
 .field-input:focus {
   border-color: rgba(0, 0, 0, 0.2);
 }
+
 .field-input::placeholder {
   color: #c2bbb1;
 }
 
-/* ── Card grid ───────────────────────────────────────────── */
+
+/* ── Card grid ─────────────────────────────────────────── */
+
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 24px;
 }
 
 @media (max-width: 780px) {
-  .cards-grid { grid-template-columns: repeat(2, 1fr); }
-  .page-container { padding: 32px 20px 60px; }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-container {
+    padding: 32px 20px 60px;
+  }
 }
 
 @media (max-width: 480px) {
-  .cards-grid { grid-template-columns: 1fr; }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
 }
 
-/* ── Empty / loading state ───────────────────────────────── */
+
+/* ── Empty / loading state ─────────────────────────────── */
+
 .state-message {
   grid-column: 1 / -1;
+
   text-align: center;
   padding: 80px 0;
+
   color: var(--color-muted);
   font-size: 12px;
   letter-spacing: 0.8px;
   line-height: 2.2;
 }
 
-/* ── Error banner ────────────────────────────────────────── */
+
+/* ── Error banner ──────────────────────────────────────── */
+
 .error-banner {
   padding: 12px 16px;
+
   border-radius: var(--radius-sm);
+
   background: #fde8ec;
   border: 1px solid #f5c2cc;
+
   color: #8c3045;
   font-size: 12px;
 }
 
-/* ── Success banner ──────────────────────────────────────── */
+
+/* ── Success banner ───────────────────────────────────── */
+
 .success-banner {
   padding: 12px 16px;
+
   border-radius: var(--radius-sm);
+
   background: #e6f4ec;
   border: 1px solid #b2dfc1;
+
   color: #2d6e45;
   font-size: 12px;
 }
