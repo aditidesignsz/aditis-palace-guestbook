@@ -10,7 +10,7 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const Inter = Inter({
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-inter",
