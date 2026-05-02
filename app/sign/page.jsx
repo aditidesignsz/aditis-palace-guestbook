@@ -256,33 +256,24 @@ export default function SignPage() {
               <div className="card-title-text">
                 Aditi's Palace
               </div>
-<div className="card-info">
 
-  <div className="ov-lbl">
-    GUEST
-  </div>
+              <div className="card-info">
 
-  <div className="ov-name">
-    {name || 'YOUR NAME'}
-  </div>
+                <div className="ov-lbl">GUEST</div>
+                <div className="ov-name">{name || 'YOUR NAME'}</div>
 
-  <div className="ov-lbl">
-    ISSUED ON
-  </div>
+                <div className="ov-lbl">ISSUED ON</div>
+                <div className="ov-val">{today}</div>
 
-  <div className="ov-val">
-    {today}
-  </div>
-
-  <div className="sign-row">
-    <span className="sign-label">SIGN</span>
-    <span className="sign-x">X</span>
-    <div className="sign-line"></div>
-  </div>
-
-</div>
+                <div className="sign-row">
+                  <span className="sign-label">SIGN</span>
+                  <span className="sign-x">X</span>
+                  <div className="sign-line"></div>
+                </div>
 
               </div>
+
+            </div>
 
             <canvas
               ref={canvasRef}
@@ -323,9 +314,10 @@ export default function SignPage() {
           {saving ? 'Saving…' : 'Sign & Add to Gallery →'}
         </button>
 
-       </form>
+      </form>
 
-      <style jsx>{`
+
+<style jsx>{`
 
 .back-link{
   color:#ff4fa3;
@@ -350,12 +342,10 @@ export default function SignPage() {
 }
 
 .sign-form{
-  max-width:360px;
+  max-width:420px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
-  align-items:left;
-  text-align:left;
   gap:28px;
 }
 
@@ -363,7 +353,6 @@ export default function SignPage() {
   width:100%;
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
   gap:10px;
 }
 
@@ -371,21 +360,14 @@ export default function SignPage() {
   font-size:12px;
   font-family:var(--font-inter);
   color:#8F8F8F;
-  white-space:nowrap;
 }
 
 .field-input{
   width:100%;
-  .color-label{
-  color:#ffffff;
-  font-family:var(--font-inter);
-  font-size:12px;
-
 }
 
 .color-picker{
   display:flex;
-  justify-content:center;
   gap:12px;
   flex-wrap:wrap;
 }
@@ -398,11 +380,6 @@ export default function SignPage() {
   flex-direction:column;
   align-items:center;
   gap:6px;
-  transition:transform .2s ease;
-}
-
-.color-option:hover{
-  transform:translateY(-2px);
 }
 
 .card-thumb{
@@ -412,10 +389,20 @@ export default function SignPage() {
   background-size:cover;
 }
 
+.color-label{
+  font-family:var(--font-inter);
+  font-size:12px;
+  color:#ffffff;
+}
+
+.color-option.selected .card-thumb{
+  outline:2px solid #ffffff;
+  outline-offset:3px;
+}
+
 .card-container{
   position:relative;
   width:100%;
-  max-width:420px;
   aspect-ratio:362/235;
   border-radius:14px;
   overflow:hidden;
@@ -430,20 +417,18 @@ export default function SignPage() {
 .card-overlay{
   position:absolute;
   inset:0;
-  padding:5% 6%;
-  pointer-events:none;
+  padding:6% 6%;
 }
 
 .card-title-text{
   font-family:var(--font-serif);
   font-size:22px;
   color:#fff;
-  letter-spacing:.3px;
   text-align:center;
 }
 
 .card-info{
-  margin-top:32px;
+  margin-top:30px;
   display:flex;
   flex-direction:column;
   gap:8px;
@@ -452,38 +437,33 @@ export default function SignPage() {
 .ov-lbl{
   font-family:var(--font-inter);
   font-size:12px;
-  opacity:.6;
-  color:#fff;
+  color:rgba(255,255,255,.6);
 }
 
 .ov-name{
   font-family:var(--font-inter);
   font-size:14px;
-  font-weight:400;
   color:#fff;
 }
 
 .ov-val{
   font-family:var(--font-inter);
-  font-weight:400;
   color:#fff;
 }
+
 .sign-row{
-  margin-top:18px;
+  margin-top:20px;
   display:flex;
   align-items:center;
   gap:6px;
-  width:100%;
 }
 
 .sign-label{
-  font-family:var(--font-inter);
   font-size:12px;
   color:rgba(255,255,255,.6);
 }
 
 .sign-x{
-  font-family:var(--font-inter);
   font-size:11px;
   color:rgba(255,255,255,.6);
 }
@@ -492,7 +472,6 @@ export default function SignPage() {
   flex:1;
   height:1px;
   background:rgba(255,255,255,.35);
-  margin-left:6px;
 }
 
 .draw-canvas{
@@ -510,17 +489,9 @@ export default function SignPage() {
   z-index:3;
   font-size:12px;
 }
-.color-option.selected .card-thumb{
-  outline:2px solid #ffffff;
-  outline-offset:3px;
-}
 
-.color-option.selected{
-  transform:translateY(-3px);
-}
+`}</style>
 
-      `}</style>
-
-    </main>
+</main>
   );
 }
