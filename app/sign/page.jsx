@@ -4,11 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
 const CARD_COLORS = [
-  { value: 'blue', label: 'Blue' },
-  { value: 'green', label: 'Green' },
-  { value: 'orange', label: 'Orange' },
-  { value: 'pink', label: 'Pink' },
-  { value: 'yellow', label: 'Yellow' },
+  { value: 'blue' },
+  { value: 'green' },
+  { value: 'orange' },
+  { value: 'pink' },
+  { value: 'yellow' },
 ];
 
 function formatDate(date) {
@@ -172,7 +172,6 @@ export default function SignPage() {
 
       </div>
 
-
       <form onSubmit={handleSubmit} className="sign-form" noValidate>
 
         <div className="field-group">
@@ -193,11 +192,10 @@ export default function SignPage() {
 
         </div>
 
-
         <div className="field-group">
 
           <span className="field-label">
-            Choose your card
+            Choose your colour
           </span>
 
           <div className="color-picker">
@@ -208,32 +206,18 @@ export default function SignPage() {
                 key={color.value}
                 type="button"
                 className={
-                  'color-option ' +
+                  'color-circle ' +
                   (cardColor === color.value ? 'selected' : '')
                 }
                 onClick={() => setCardColor(color.value)}
-              >
-
-                <div
-                  className="card-thumb"
-                  style={{
-                    backgroundImage:
-                      `url(/cards/card-${color.value}.png)`
-                  }}
-                />
-
-                <span className="color-label">
-                  {color.label}
-                </span>
-
-              </button>
+                style={{ backgroundColor: color.value }}
+              />
 
             ))}
 
           </div>
 
         </div>
-
 
         <div className="field-group">
 
@@ -299,7 +283,6 @@ export default function SignPage() {
 
         </div>
 
-
         {error && (
           <div className="error-banner">
             {error}
@@ -315,7 +298,6 @@ export default function SignPage() {
         </button>
 
       </form>
-
 
 <style jsx>{`
 
@@ -368,36 +350,28 @@ export default function SignPage() {
 
 .color-picker{
   display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
 }
 
-.color-option{
+.color-circle{
+  width:36px;
+  height:36px;
+  border-radius:50%;
   border:none;
-  background:none;
   cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
+  transition:all .25s ease;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.08);
 }
 
-.card-thumb{
-  width:90px;
-  height:58px;
-  border-radius:8px;
-  background-size:cover;
+.color-circle:hover{
+  transform:scale(1.08);
 }
 
-.color-label{
-  font-family:var(--font-inter);
-  font-size:12px;
-  color:#ffffff;
-}
-
-.color-option.selected .card-thumb{
-  outline:2px solid #ffffff;
-  outline-offset:3px;
+.color-circle.selected{
+  box-shadow:
+  0 0 0 3px #fff,
+  0 0 0 6px rgba(255,255,255,.15);
 }
 
 .card-container{
