@@ -102,10 +102,10 @@ export default function VisitorCard({ visitor }) {
 
         .card-title {
           font-family: var(--font-serif);
-          font-size: 18px;
+          font-size: 20px;
           color: #fff;
-          text-align: center;
-          width: 55%;
+          text-align: left;
+        
           margin-bottom: auto;
           text-shadow: 0 1px 4px rgba(0,0,0,0.15);
         }
@@ -127,17 +127,16 @@ export default function VisitorCard({ visitor }) {
         .lbl {
           font-family: var(--font-mono);
           font-size: 12px;
-          font-weight: 500;
-          letter-spacing: 1px;
-          color: rgba(0,0,0,0.7);
+          font-weight: 650;
+          color: rgba(0,0,0,0.6);
           text-transform: uppercase;
         }
 
         .val {
           font-family: var(--font-inter);
-          font-size: 14px;
+          font-size: 13px;
           color: #fff;
-          font-weight: 400;
+          font-weight: 500;
           letter-spacing: 0.2px;
         }
 
