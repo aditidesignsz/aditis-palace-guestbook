@@ -323,11 +323,13 @@ export default function SignPage() {
 
       <style jsx>{`
 
-      .back-link{
-        display:inline-block;
-        margin-bottom:30px;
-        font-size:12px;
-        color:#888;
+     .back-link {
+  color: #ff4fa3;
+  font-family: var(--font-inter);
+}
+
+.back-link:hover {
+  opacity: 0.7;
       }
 
       .sign-header{
@@ -336,20 +338,23 @@ export default function SignPage() {
 
       .page-sub{
         font-size:12px;
-        font-family:var(--font-mono);
+        font-family:var(--font-inter);
         margin-top:6px;
+        color: #8F8F8F;
       }
 
       .sign-form{
-        max-width:360px;
-        display:flex;
-        flex-direction:column;
-        gap:28px;
+          max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
       }
 
       .field-label{
         font-size:12px;
-        font-family:var(--font-mono);
+        font-family:var(--font-inter);
+        white-space: nowrap;
       }
 
       .color-picker{
