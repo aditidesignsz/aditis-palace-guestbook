@@ -29,14 +29,7 @@ export default function VisitorCard({ visitor }) {
      <div
   className="card"
   style={{ backgroundImage: `url(${theme.image})` }}
-  onMouseMove={(e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
 
-    e.currentTarget.style.setProperty('--x', `${x}px`);
-    e.currentTarget.style.setProperty('--y', `${y}px`);
-  }}
 >
 
         {/* Title */}
@@ -109,28 +102,28 @@ export default function VisitorCard({ visitor }) {
   overflow:hidden;
 }
 
-/* Cursor glow */
+/* Sparkle effect */
 
-.card::before{
+.card::after{
   content:"";
   position:absolute;
   inset:0;
 
-  background:radial-gradient(
-    circle 140px at var(--x) var(--y),
-    rgba(255,255,255,0.35),
-    transparent 60%
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.35) 50%,
+    transparent 70%
   );
 
-  opacity:0;
-  transition:opacity .25s ease;
-  pointer-events:none;
+  transform:translateX(-120%);
+  transition:transform .8s ease;
 }
 
-.card-wrapper:hover .card::before{
-  opacity:1;
-}
+.card-wrapper:hover .card::after{
+  transform:translateX(120%);
 
+}
 /* sparkle particles */
 
 .card::after{
