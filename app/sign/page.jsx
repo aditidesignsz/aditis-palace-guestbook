@@ -376,6 +376,11 @@ export default function SignPage() {
 
 .field-input{
   width:100%;
+  .color-label{
+  color:#ffffff;
+  font-family:var(--font-inter);
+  font-size:12px;
+
 }
 
 .color-picker{
@@ -433,11 +438,15 @@ export default function SignPage() {
   font-family:var(--font-serif);
   font-size:22px;
   color:#fff;
+  letter-spacing:.3px;
   text-align:center;
 }
 
 .card-info{
-  margin-top:30px;
+  margin-top:32px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 
 .ov-lbl{
@@ -458,6 +467,32 @@ export default function SignPage() {
   font-family:var(--font-inter);
   font-weight:400;
   color:#fff;
+}
+.sign-row{
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  width:100%;
+}
+
+.sign-label{
+  font-family:var(--font-inter);
+  font-size:12px;
+  color:rgba(255,255,255,.6);
+}
+
+.sign-x{
+  font-family:var(--font-inter);
+  font-size:11px;
+  color:rgba(255,255,255,.6);
+}
+
+.sign-line{
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,.35);
+  margin-left:6px;
 }
 
 .draw-canvas{
