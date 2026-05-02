@@ -320,9 +320,7 @@ export default function SignPage() {
 
       </form>
 
-      
 
-  </main>
 
   <style jsx>{`
     
