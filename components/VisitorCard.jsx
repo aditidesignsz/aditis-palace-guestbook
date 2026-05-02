@@ -184,15 +184,17 @@ export default function VisitorCard({ visitor }) {
           color: rgba(0,0,0,0.3);
         }
 
-        .sig-img {
+.sig-img {
   position: absolute;
-  left: 45px;
-  bottom: 10px;
-  width: 85%;
+  left: 35px;
+  bottom: 12px;
+
+  width: 120%;
+  max-width: 180px;
+
   height: auto;
   object-fit: contain;
-        }
-
+}
         .sig-line {
           position: absolute;
           bottom: 0;
