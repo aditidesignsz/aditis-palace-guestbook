@@ -407,6 +407,7 @@ export default function SignPage() {
 .ov-lbl{
   font-family:var(--font-inter);
   font-size:12px;
+   font-weight:600;
   color:rgba(255,255,255,.6);
 }
 
