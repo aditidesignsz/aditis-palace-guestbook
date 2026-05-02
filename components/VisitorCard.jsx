@@ -180,17 +180,17 @@ export default function VisitorCard({ visitor }) {
 
         .sign-x {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: rgba(0,0,0,0.3);
         }
 
 .sig-img {
   position: absolute;
   left: 35px;
-  bottom: 12px;
+  bottom: 9px;
 
-  width: 120%;
-  max-width: 180px;
+  width: 150%;
+  max-width: 2000px;
 
   height: auto;
   object-fit: contain;
