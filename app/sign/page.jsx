@@ -205,8 +205,8 @@ export default function SignPage() {
                   'color-circle ' +
                   (cardColor === color.value ? 'selected' : '')
                 }
-                onClick={() => setCardColor(color.value)}
-                style={{ backgroundColor: color.value }}
+                onClick={() => setCardColor(color.name)}
+                style={{ backgroundColor: color.color }}
               />
 
             ))}
