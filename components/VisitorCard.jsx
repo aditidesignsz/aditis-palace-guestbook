@@ -75,7 +75,7 @@ export default function VisitorCard({ visitor }) {
 
       <style jsx>{`
 
-        .card-wrapper {
+ .card-wrapper {
   border-radius: 24px;
   overflow: hidden;
   aspect-ratio: 362 / 235;
@@ -86,6 +86,28 @@ export default function VisitorCard({ visitor }) {
 .card-wrapper:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.card-wrapper:hover .card::after {
+  opacity: .4;
 }
 
         .card {
@@ -127,8 +149,8 @@ export default function VisitorCard({ visitor }) {
         .lbl {
           font-family: var(--font-inter);
           font-size: 12px;
-          font-weight: 650;
-          color: rgba(255,255,255,0.5);
+          font-weight: 600;
+          color: rgba(255,255,255,0.4);
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
