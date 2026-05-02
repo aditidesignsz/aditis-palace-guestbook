@@ -196,11 +196,11 @@ export default function SignPage() {
             {CARD_COLORS.map((color) => (
 
               <button
-                key={color.value}
+                key={color.name}
                 type="button"
                 className={
                   'color-circle ' +
-                  (cardColor === color.value ? 'selected' : '')
+                  (cardColor === color.name ? 'selected' : '')
                 }
                 onClick={() => setCardColor(color.name)}
                 style={{ backgroundColor: color.color }}
@@ -295,7 +295,7 @@ export default function SignPage() {
 <style jsx>{`
 
 .back-link{
-  color:#ff4fa3;
+  color:#B54E6F;
   font-family:var(--font-inter);
   margin-bottom:20px;
   display:inline-block;
@@ -442,7 +442,7 @@ export default function SignPage() {
 }
 
 .sign-line{
-  flex:1;
+   width:140px;
   height:1px;
   background:rgba(255,255,255,.35);
 }
