@@ -358,7 +358,7 @@ export default function SignPage() {
 }
 
 .color-circle:hover{
-  transform:scale(1.7);
+  transform:scale(1.5);
 }
 
 .color-circle.selected{
@@ -369,7 +369,7 @@ export default function SignPage() {
   0 0 0 6px rgba(255,255,255,0.25),
   0 8px 20px rgba(0,0,0,0.4);
 
-  border:2px solid #fff;
+  border:1px solid #fff;
 }
 
 .card-container{
