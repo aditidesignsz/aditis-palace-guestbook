@@ -160,9 +160,9 @@ export default function VisitorCard({ visitor }) {
 
         .sig-img {
   position: absolute;
-  left: 30px;
-  bottom: 12px;
-  width: 75%;
+  left: 45px;
+  bottom: 10px;
+  width: 85%;
   height: auto;
   object-fit: contain;
         }
