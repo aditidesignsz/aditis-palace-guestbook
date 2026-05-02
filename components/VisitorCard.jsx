@@ -125,12 +125,12 @@ export default function VisitorCard({ visitor }) {
         }
 
         .lbl {
-          font-family: var(--font-mono);
+          font-family: var(--font-inter);
           font-size: 12px;
           font-weight: 650;
-          color: rgba(0,0,0,0.6);
+          color: rgba(255,255,255,0.5);
           text-transform: uppercase;
-          letter-spacing: 0.2px;
+          letter-spacing: 0.5px;
         }
 
         .val {
