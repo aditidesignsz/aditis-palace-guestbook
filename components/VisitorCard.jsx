@@ -83,33 +83,44 @@ export default function VisitorCard({ visitor }) {
               box-shadow 0.35s ease;
 }
 
-.card-wrapper:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+.card-wrapper:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
 }
 
-.card {
-  position: relative;
-  overflow: hidden;
+.card{
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:6% 6%;
+  box-sizing:border-box;
+  overflow:hidden;
 }
+
+/* Sparkle effect */
 
 .card::after{
   content:"";
   position:absolute;
   inset:0;
-  background: radial-gradient(
-    circle at 25% 15%,
-    rgba(255,255,255,0.45),
-    rgba(255,255,255,0.18) 35%,
-    rgba(255,255,255,0.06) 55%,
+
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.35) 50%,
     transparent 70%
   );
-  opacity:0;
-  transition:opacity .45s ease;
+
+  transform:translateX(-120%);
+  transition:transform .9s ease;
 }
 
 .card-wrapper:hover .card::after{
-  opacity:.75;
+  transform:translateX(120%);
 }
 
         .card {
