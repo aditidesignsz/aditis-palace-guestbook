@@ -162,10 +162,7 @@ export default function SignPage() {
           Sign the Guestbook
         </h1>
 
-        <p className="page-sub">
-          Draw your signature directly on the card ✦
-        </p>
-
+    
       </div>
 
       <form onSubmit={handleSubmit} className="sign-form" noValidate>
@@ -335,7 +332,7 @@ export default function SignPage() {
 }
 
 .field-label{
-  font-size:13px;
+  font-size:14px;
   font-family:var(--font-inter);
   color:#8F8F8F;
 }
