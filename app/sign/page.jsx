@@ -115,11 +115,7 @@ export default function SignPage() {
     if (!name.trim()) {
       setError('Please enter your name.');
       return;
-    }
-
-    if (!hasDrawn) {
-      setError('Please draw your signature on the card.');
-      return;
+  
     }
 
     const signature = canvasRef.current.toDataURL('image/png');
