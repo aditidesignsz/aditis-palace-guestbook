@@ -130,6 +130,7 @@ export default function VisitorCard({ visitor }) {
           font-weight: 650;
           color: rgba(0,0,0,0.6);
           text-transform: uppercase;
+          letter-spacing: 0.2px;
         }
 
         .val {
