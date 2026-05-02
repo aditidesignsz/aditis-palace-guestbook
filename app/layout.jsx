@@ -1,6 +1,6 @@
 // app/layout.jsx
 
-import { Playfair_Display, Space_Mono } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -10,10 +10,10 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const spaceMono = Space_Mono({
+const Inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
-  variable: "--font-mono",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -24,7 +24,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${spaceMono.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   );
