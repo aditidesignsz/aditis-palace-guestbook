@@ -338,27 +338,27 @@ export default function SignPage() {
 }
 
 .page-sub{
-  font-size:12px;
+  font-size:14px;
   font-family:var(--font-inter);
   margin-top:6px;
   color:#8F8F8F;
 }
 
 .sign-form{
-  max-width:1280px;
+  max-width:900px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
-  text-align:center;
-  gap:24px;
+  text-align:left;
+  gap:28px;
 }
 
 .field-group{
   width:100%;
   display:flex;
   flex-direction:column;
-  align-items:center;
+  align-items:flex-start;
   gap:10px;
 }
 
@@ -438,7 +438,7 @@ export default function SignPage() {
 .ov-lbl{
   font-family:var(--font-inter);
   font-size:12px;
-  opacity:.5;
+  opacity:.6;
   color:#fff;
 }
 
@@ -469,6 +469,14 @@ export default function SignPage() {
   right:10px;
   z-index:3;
   font-size:12px;
+}
+.color-option.selected .card-thumb{
+  outline:2px solid #ffffff;
+  outline-offset:3px;
+}
+
+.color-option.selected{
+  transform:translateY(-3px);
 }
 
       `}</style>
