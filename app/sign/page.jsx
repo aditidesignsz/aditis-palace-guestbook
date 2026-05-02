@@ -350,11 +350,11 @@ export default function SignPage() {
 }
 
 .sign-form{
-  max-width:900px;
+  max-width:360px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
-  align-items:center;
+  align-items:left;
   text-align:left;
   gap:28px;
 }
