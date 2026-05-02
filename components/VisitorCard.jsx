@@ -79,12 +79,13 @@ export default function VisitorCard({ visitor }) {
           border-radius: 24px;
           overflow: hidden;
           aspect-ratio: 362 / 235;
-          transition: transform 0.18s ease, box-shadow 0.18s ease;
+           transition: transform .35s cubic-bezier(.2,.8,.2,1),
+              box-shadow .35s cubic-bezier(.2,.8,.2,1);
         }
 
         .card-wrapper:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 14px 36px rgba(0,0,0,0.18);
+         transform: translateY(-6px) scale(1.015);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.35);
         }
 
         .card {
@@ -95,7 +96,7 @@ export default function VisitorCard({ visitor }) {
           position: relative;
           display: flex;
           flex-direction: column;
-          padding: 5% 6%;
+          padding: 6% 6%;
           box-sizing: border-box;
         }
 
@@ -126,8 +127,9 @@ export default function VisitorCard({ visitor }) {
         .lbl {
           font-family: var(--font-mono);
           font-size: 12px;
+          font-weight: 500;
           letter-spacing: 1px;
-          color: rgba(0,0,0,0.5);
+          color: rgba(0,0,0,0.7);
           text-transform: uppercase;
         }
 
@@ -135,12 +137,12 @@ export default function VisitorCard({ visitor }) {
           font-family: var(--font-inter);
           font-size: 14px;
           color: #fff;
-          font-weight: 600;
-          letter-spacing: 0.3px;
+          font-weight: 400;
+          letter-spacing: 0.2px;
         }
 
         .val-name {
-          font-size: 15px;
+          font-size: 14px;
         }
 
         .sign-row {
