@@ -442,9 +442,9 @@ export default function SignPage() {
 }
 
 .sign-line{
-   width:140px;
-  height:1px;
-  background:rgba(255,255,255,.35);
+   width:160px;
+  height:2px;
+  background:rgba(255,255,255,.5);
 }
 
 .draw-canvas{
