@@ -26,10 +26,18 @@ export default function VisitorCard({ visitor }) {
 
     <article className="card-wrapper">
 
-      <div
-        className="card"
-        style={{ backgroundImage: `url(${theme.image})` }}
-      >
+     <div
+  className="card"
+  style={{ backgroundImage: `url(${theme.image})` }}
+  onMouseMove={(e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    e.currentTarget.style.setProperty('--x', `${x}px`);
+    e.currentTarget.style.setProperty('--y', `${y}px`);
+  }}
+>
 
         {/* Title */}
 
@@ -75,12 +83,12 @@ export default function VisitorCard({ visitor }) {
 
       <style jsx>{`
 
- .card-wrapper {
-  border-radius: 24px;
-  overflow: hidden;
-  aspect-ratio: 362 / 235;
-  transition: transform 0.35s cubic-bezier(.22,.61,.36,1),
-              box-shadow 0.35s ease;
+.card-wrapper{
+  border-radius:24px;
+  overflow:hidden;
+  aspect-ratio:362 / 235;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1),
+             box-shadow .35s ease;
 }
 
 .card-wrapper:hover{
@@ -101,27 +109,49 @@ export default function VisitorCard({ visitor }) {
   overflow:hidden;
 }
 
-/* Sparkle effect */
+/* Cursor glow */
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:radial-gradient(
+    circle 140px at var(--x) var(--y),
+    rgba(255,255,255,0.35),
+    transparent 60%
+  );
+
+  opacity:0;
+  transition:opacity .25s ease;
+  pointer-events:none;
+}
+
+.card-wrapper:hover .card::before{
+  opacity:1;
+}
+
+/* sparkle particles */
 
 .card::after{
   content:"";
   position:absolute;
   inset:0;
 
-  background:linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,255,255,0.35) 50%,
-    transparent 70%
-  );
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.7), transparent),
+    radial-gradient(2px 2px at 80% 40%, rgba(255,255,255,.6), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(255,255,255,.7), transparent),
+    radial-gradient(2px 2px at 40% 80%, rgba(255,255,255,.6), transparent);
 
-  transform:translateX(-120%);
-  transition:transform .9s ease;
+  opacity:0;
+  transition:opacity .4s ease;
 }
 
 .card-wrapper:hover .card::after{
-  transform:translateX(120%);
+  opacity:.6;
 }
+
 
         .card {
           width: 100%;
