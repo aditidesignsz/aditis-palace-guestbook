@@ -10,7 +10,6 @@ const CARD_COLORS = [
   { value: '#B54E6F' }, // pink
   { value: '#F0C123' }, // yellow
 ];
-];
 
 function formatDate(date) {
   const dd = String(date.getDate()).padStart(2, '0');
