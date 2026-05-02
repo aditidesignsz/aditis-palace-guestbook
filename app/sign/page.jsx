@@ -320,9 +320,7 @@ export default function SignPage() {
 
       </form>
 
-
-
-  <style jsx>{`
+<style jsx>{`
     
 .back-link{
   color:#ff4fa3;
@@ -474,3 +472,5 @@ export default function SignPage() {
 }
 
 `}</style>
+        </main>
+);
