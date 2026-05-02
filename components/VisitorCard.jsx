@@ -101,7 +101,7 @@ export default function VisitorCard({ visitor }) {
 
         .card-title {
           font-family: var(--font-serif);
-          font-size: 24px;
+          font-size: 18px;
           color: #fff;
           text-align: center;
           width: 55%;
@@ -127,7 +127,7 @@ export default function VisitorCard({ visitor }) {
           font-family: var(--font-mono);
           font-size: 12px;
           letter-spacing: 1px;
-          color: rgba(0,0,0,0.3);
+          color: rgba(0,0,0,0.5);
           text-transform: uppercase;
         }
 
