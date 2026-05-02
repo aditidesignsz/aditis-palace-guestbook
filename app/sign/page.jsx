@@ -341,7 +341,7 @@ export default function SignPage() {
       }
 
       .sign-form{
-        max-width:560px;
+        max-width:360px;
         display:flex;
         flex-direction:column;
         gap:28px;
