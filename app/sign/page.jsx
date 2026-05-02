@@ -4,11 +4,12 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
 const CARD_COLORS = [
-  { value: 'blue' },
-  { value: 'green' },
-  { value: 'orange' },
-  { value: 'pink' },
-  { value: 'yellow' },
+  { value: '#0A6DA1' }, // blue
+  { value: '#309858' }, // green
+  { value: '#D57B34' }, // orange
+  { value: '#B54E6F' }, // pink
+  { value: '#F0C123' }, // yellow
+];
 ];
 
 function formatDate(date) {
@@ -335,7 +336,7 @@ export default function SignPage() {
 }
 
 .field-label{
-  font-size:12px;
+  font-size:13px;
   font-family:var(--font-inter);
   color:#8F8F8F;
 }
