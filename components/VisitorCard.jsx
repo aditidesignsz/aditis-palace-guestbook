@@ -132,7 +132,7 @@ export default function VisitorCard({ visitor }) {
         }
 
         .val {
-          font-family: var(--font-mono);
+          font-family: var(--font-inter);
           font-size: 14px;
           color: #fff;
           font-weight: 600;
