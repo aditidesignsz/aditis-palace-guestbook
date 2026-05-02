@@ -117,19 +117,12 @@ export default function VisitorCard({ visitor }) {
   );
 
   transform:translateX(-120%);
-  transition:transform .8s ease;
+  transition:transform .9s ease;
 }
 
 .card-wrapper:hover .card::after{
   transform:translateX(120%);
-
 }
-/* sparkle particles */
-
-.card::after{
-  content:"";
-  position:absolute;
-  inset:0;
 
   background-image:
     radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.7), transparent),
