@@ -321,128 +321,155 @@ export default function SignPage() {
       </form>
 
 
-      <style jsx>{`
+    <style jsx>{`
 
-     .back-link {
-  color: #ff4fa3;
-  font-family: var(--font-inter);
+.back-link{
+  color:#ff4fa3;
+  font-family:var(--font-inter);
+  margin-bottom:20px;
+  display:inline-block;
 }
 
-.back-link:hover {
-  opacity: 0.7;
-      }
-
-      .sign-header{
-        margin-bottom:30px;
-      }
-
-      .page-sub{
-        font-size:12px;
-        font-family:var(--font-inter);
-        margin-top:6px;
-        color: #8F8F8F;
-      }
-
-      .sign-form{
-          max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-      }
-
-      .field-label{
-        font-size:12px;
-        font-family:var(--font-inter);
-        white-space: nowrap;
-      }
-
-      .color-picker{
-        display:flex;
-        gap:12px;
-        flex-wrap:wrap;
-      }
-
-      .color-option{
-        border:none;
-        background:none;
-        cursor:pointer;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:6px;
-      }
-
-      .card-thumb{
-        width:90px;
-        height:58px;
-        border-radius:8px;
-        background-size:cover;
-      }
-
-      .card-container{
-        position:relative;
-        width:100%;
-        aspect-ratio:362/235;
-        border-radius:14px;
-        overflow:hidden;
-      }
-
-      .card-bg{
-        position:absolute;
-        inset:0;
-        background-size:cover;
-      }
-
-      .card-overlay{
-        position:absolute;
-        inset:0;
-        padding:5% 6%;
-        pointer-events:none;
-      }
-
-      .card-title-text{
-        font-family:var(--font-serif);
-        font-size:24px;
-        color:#fff;
-        text-align:center;
-      }
-
-      .ov-lbl{
-        font-family:var(--font-mono);
-        font-size:12px;
-        opacity:.3;
-      }
-
-      .ov-name{
-        font-family:var(--font-mono);
-        font-size:14px;
-        color:#fff;
-      }
-
-      .ov-val{
-        font-family:var(--font-mono);
-        color:#fff;
-      }
-
-      .draw-canvas{
-        position:absolute;
-        inset:0;
-        width:100%;
-        height:100%;
-        z-index:2;
-      }
-
-      .clear-btn{
-        position:absolute;
-        top:10px;
-        right:10px;
-        z-index:3;
-      }
-
-      `}</style>
-
-    </main>
-
-  );
+.back-link:hover{
+  opacity:.7;
 }
+
+.sign-header{
+  margin-bottom:36px;
+}
+
+.page-sub{
+  font-size:12px;
+  font-family:var(--font-inter);
+  margin-top:6px;
+  color:#8F8F8F;
+}
+
+.sign-form{
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:24px;
+}
+
+.field-group{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
+.field-label{
+  font-size:12px;
+  font-family:var(--font-inter);
+  color:#8F8F8F;
+  white-space:nowrap;
+}
+
+.field-input{
+  width:100%;
+}
+
+.color-picker{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.color-option{
+  border:none;
+  background:none;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  transition:transform .2s ease;
+}
+
+.color-option:hover{
+  transform:translateY(-2px);
+}
+
+.card-thumb{
+  width:90px;
+  height:58px;
+  border-radius:8px;
+  background-size:cover;
+}
+
+.card-container{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  aspect-ratio:362/235;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.card-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+}
+
+.card-overlay{
+  position:absolute;
+  inset:0;
+  padding:5% 6%;
+  pointer-events:none;
+}
+
+.card-title-text{
+  font-family:var(--font-serif);
+  font-size:22px;
+  color:#fff;
+  text-align:center;
+}
+
+.card-info{
+  margin-top:30px;
+}
+
+.ov-lbl{
+  font-family:var(--font-inter);
+  font-size:12px;
+  opacity:.5;
+  color:#fff;
+}
+
+.ov-name{
+  font-family:var(--font-inter);
+  font-size:14px;
+  font-weight:400;
+  color:#fff;
+}
+
+.ov-val{
+  font-family:var(--font-inter);
+  font-weight:400;
+  color:#fff;
+}
+
+.draw-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:2;
+}
+
+.clear-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:3;
+  font-size:12px;
+}
+
+`}</style>
