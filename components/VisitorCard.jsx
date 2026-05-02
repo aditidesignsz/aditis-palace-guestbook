@@ -93,21 +93,23 @@ export default function VisitorCard({ visitor }) {
   overflow: hidden;
 }
 
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
   background: radial-gradient(
-    circle at 30% 20%,
-    rgba(255,255,255,0.25),
-    transparent 60%
+    circle at 25% 15%,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.18) 35%,
+    rgba(255,255,255,0.06) 55%,
+    transparent 70%
   );
-  opacity: 0;
-  transition: opacity .4s ease;
+  opacity:0;
+  transition:opacity .45s ease;
 }
 
-.card-wrapper:hover .card::after {
-  opacity: .4;
+.card-wrapper:hover .card::after{
+  opacity:.75;
 }
 
         .card {
