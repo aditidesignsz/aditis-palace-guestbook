@@ -81,7 +81,7 @@ export default function SignPage() {
     ctx.lineTo(pos.x, pos.y);
 
     ctx.strokeStyle = 'rgba(255,255,255,255)';
-    ctx.lineWidth = 4.5;
+    ctx.lineWidth = 5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
