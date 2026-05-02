@@ -361,18 +361,18 @@ export default function SignPage() {
 }
 
 .color-circle:hover{
-  transform:scale(1.08);
+  transform:scale(1.7);
 }
 
 .color-circle.selected{
-  transform: scale(1.15);
+  transform:scale(1.15);
 
   box-shadow:
   0 0 0 3px #ffffff,
-  0 0 0 6px rgba(255,255,255,.25),
+  0 0 0 6px rgba(255,255,255,0.25),
   0 8px 20px rgba(0,0,0,0.4);
 
-  border: 2px solid #fff;
+  border:2px solid #fff;
 }
 
 .card-container{
