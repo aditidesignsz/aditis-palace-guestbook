@@ -76,17 +76,17 @@ export default function VisitorCard({ visitor }) {
       <style jsx>{`
 
         .card-wrapper {
-          border-radius: 24px;
-          overflow: hidden;
-          aspect-ratio: 362 / 235;
-           transition: transform .35s cubic-bezier(.2,.8,.2,1),
-              box-shadow .35s cubic-bezier(.2,.8,.2,1);
-        }
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 362 / 235;
+  transition: transform 0.35s cubic-bezier(.22,.61,.36,1),
+              box-shadow 0.35s ease;
+}
 
-        .card-wrapper:hover {
-         transform: translateY(-6px) scale(1.015);
-        box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-        }
+.card-wrapper:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
 
         .card {
           width: 100%;
