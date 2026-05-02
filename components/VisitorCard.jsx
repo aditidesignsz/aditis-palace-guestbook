@@ -159,14 +159,12 @@ export default function VisitorCard({ visitor }) {
         }
 
         .sig-img {
-          position: absolute;
-          left: 36px;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 60%;
-          height: 40px;
-          object-fit: contain;
-          object-position: left center;
+  position: absolute;
+  left: 30px;
+  bottom: 12px;
+  width: 75%;
+  height: auto;
+  object-fit: contain;
         }
 
         .sig-line {
