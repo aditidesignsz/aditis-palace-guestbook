@@ -4,11 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
 const CARD_COLORS = [
-  { value: '#0A6DA1' }, // blue
-  { value: '#309858' }, // green
-  { value: '#D57B34' }, // orange
-  { value: '#B54E6F' }, // pink
-  { value: '#F0C123' }, // yellow
+  { name: 'blue', color: '#2D7DA8' },
+  { name: 'green', color: '#2E9C57' },
+  { name: 'orange', color: '#D67F39' },
+  { name: 'pink', color: '#B54E6F' },
+  { name: 'yellow', color: '#F0C123' },
 ];
 
 function formatDate(date) {
