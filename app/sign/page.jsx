@@ -256,28 +256,33 @@ export default function SignPage() {
               <div className="card-title-text">
                 Aditi's Palace
               </div>
+<div className="card-info">
 
-              <div className="card-info">
+  <div className="ov-lbl">
+    GUEST
+  </div>
 
-                <div className="ov-lbl">
-                  GUEST
-                </div>
+  <div className="ov-name">
+    {name || 'YOUR NAME'}
+  </div>
 
-                <div className="ov-name">
-                  {name || 'YOUR NAME'}
-                </div>
+  <div className="ov-lbl">
+    ISSUED ON
+  </div>
 
-                <div className="ov-lbl">
-                  ISSUED ON
-                </div>
+  <div className="ov-val">
+    {today}
+  </div>
 
-                <div className="ov-val">
-                  {today}
-                </div>
+  <div className="sign-row">
+    <span className="sign-label">SIGN</span>
+    <span className="sign-x">X</span>
+    <div className="sign-line"></div>
+  </div>
+
+</div>
 
               </div>
-
-            </div>
 
             <canvas
               ref={canvasRef}
