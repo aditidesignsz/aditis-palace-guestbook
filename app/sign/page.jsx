@@ -318,10 +318,10 @@ export default function SignPage() {
           {saving ? 'Saving…' : 'Sign & Add to Gallery →'}
         </button>
 
-      </form>
+       </form>
 
-<style jsx>{`
-    
+      <style jsx>{`
+
 .back-link{
   color:#ff4fa3;
   font-family:var(--font-inter);
@@ -471,6 +471,8 @@ export default function SignPage() {
   font-size:12px;
 }
 
-`}</style>
-        </main>
-);
+      `}</style>
+
+    </main>
+  );
+}
