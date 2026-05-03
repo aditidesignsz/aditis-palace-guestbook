@@ -29,11 +29,11 @@ export default function VisitorCard({ visitor }) {
         style={{ backgroundImage: `url(${theme.image})` }}
       >
 
-        {/* HEADER (logo + title) */}
+        {/* HEADER */}
         <div className="card-header">
 
           <div className="card-logo">
-            <img src="/logo.png" alt="logo" />
+            <img src="/favicon.ico" alt="logo" />
           </div>
 
           <div className="card-title">
@@ -108,7 +108,7 @@ export default function VisitorCard({ visitor }) {
   overflow:hidden;
 }
 
-/* ✨ SINGLE CLEAN SHINE */
+/* SINGLE SHINE EFFECT */
 
 .card::after{
   content:"";
@@ -148,16 +148,15 @@ export default function VisitorCard({ visitor }) {
 }
 
 .card-logo img{
-  width:28px;
+  width:36px; /* increased for favicon */
   height:auto;
-  opacity:0.9;
+  opacity:0.95;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-  transition: transform .2s ease, opacity .2s ease;
+  transition: transform .2s ease;
 }
 
 .card-wrapper:hover .card-logo img{
   transform: scale(1.08);
-  opacity:1;
 }
 
 /* TITLE */
