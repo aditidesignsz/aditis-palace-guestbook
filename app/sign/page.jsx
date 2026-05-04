@@ -24,7 +24,6 @@ export default function SignPage() {
   const [cardColor, setCardColor] = useState('blue');
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
-  const [hasDrawn, setHasDrawn] = useState(false);
 
   const canvasRef = useRef(null);
   const isDrawing = useRef(false);
@@ -33,10 +32,7 @@ export default function SignPage() {
   const today = formatDate(new Date());
 
   useEffect(() => {
-
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
     const ratio = window.devicePixelRatio || 1;
 
     canvas.width = canvas.offsetWidth * ratio;
@@ -44,20 +40,14 @@ export default function SignPage() {
 
     const ctx = canvas.getContext('2d');
     ctx.scale(ratio, ratio);
-
   }, []);
 
   function getPos(e, canvas) {
-
     const rect = canvas.getBoundingClientRect();
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
 
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-    return {
-      x: clientX - rect.left,
-      y: clientY - rect.top
-    };
+    return { x: x - rect.left, y: y - rect.top };
   }
 
   function startDraw(e) {
@@ -67,29 +57,21 @@ export default function SignPage() {
   }
 
   function draw(e) {
-
-    e.preventDefault();
     if (!isDrawing.current) return;
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
-    const pos = getPos(e, canvas);
+    const ctx = canvasRef.current.getContext('2d');
+    const pos = getPos(e, canvasRef.current);
 
     ctx.beginPath();
     ctx.moveTo(lastPos.current.x, lastPos.current.y);
     ctx.lineTo(pos.x, pos.y);
 
-    ctx.strokeStyle = 'rgba(255,255,255,255)';
-    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 4;
     ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
 
     ctx.stroke();
-
     lastPos.current = pos;
-
-    setHasDrawn(true);
   }
 
   function stopDraw() {
@@ -97,197 +79,131 @@ export default function SignPage() {
   }
 
   function clearCanvas() {
-
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    setHasDrawn(false);
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   }
 
   async function handleSubmit(e) {
-
     e.preventDefault();
-
     setError('');
 
     if (!name.trim()) {
       setError('Please enter your name.');
       return;
-  
     }
 
-    const signature = canvasRef.current.toDataURL('image/png');
+    const signature = canvasRef.current.toDataURL();
 
     setSaving(true);
 
     try {
-
       const res = await fetch('/api/visit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name.trim(),
-          card_color: cardColor,
-          signature
-        })
+        body: JSON.stringify({ name, card_color: cardColor, signature }),
       });
 
-      const json = await res.json();
-
-      if (!res.ok) throw new Error(json.error || 'Something went wrong.');
+      if (!res.ok) throw new Error('Failed');
 
       window.location.href = '/';
 
     } catch (err) {
-
-      setError(err.message);
+      setError('Something went wrong.');
       setSaving(false);
-
     }
   }
 
   return (
-
     <main className="page-container">
 
       <Link href="/" className="back-link">
         ← Back to gallery
       </Link>
 
-      <div className="sign-header">
+      <h1 className="page-heading">Sign the Guestbook</h1>
 
-        <h1 className="page-heading">
-          Sign the Guestbook
-        </h1>
+      <form onSubmit={handleSubmit} className="sign-form">
 
-    
-      </div>
-
-      <form onSubmit={handleSubmit} className="sign-form" noValidate>
-
+        {/* INPUT */}
         <div className="field-group">
-
-          <label className="field-label">
-            Your name
-          </label>
+          <label className="field-label">Your name</label>
 
           <input
-            type="text"
-            className="field-input"
-            placeholder="Your name"
+            className={`field-input ${error ? 'error' : ''}`}
+            placeholder="Enter your name..."
             value={name}
             onChange={(e) => setName(e.target.value)}
-            maxLength={60}
-            disabled={saving}
           />
-
         </div>
 
+        {/* CARD */}
         <div className="field-group">
-
-          <span className="field-label">
-            Choose your colour
-          </span>
-
-          <div className="color-picker">
-
-            {CARD_COLORS.map((color) => (
-
-              <button
-                key={color.name}
-                type="button"
-                className={
-                  'color-circle ' +
-                  (cardColor === color.name ? 'selected' : '')
-                }
-                onClick={() => setCardColor(color.name)}
-                style={{ backgroundColor: color.color }}
-              />
-
-            ))}
-
-          </div>
-
-        </div>
-
-        <div className="field-group">
-
-          <span className="field-label">
-            Sign on your card
-          </span>
+          <span className="field-label">Sign on your card</span>
 
           <div className="card-container">
 
             <div
               className="card-bg"
-              style={{
-                backgroundImage:
-                  `url(/cards/card-${cardColor}.png)`
-              }}
+              style={{ backgroundImage: `url(/cards/card-${cardColor}.png)` }}
             />
 
             <div className="card-overlay">
 
-              <div className="card-title-text">
-                Aditi's Palace
-              </div>
+              <div className="card-title">Aditi's Palace</div>
 
               <div className="card-info">
+                <span className="lbl">GUEST</span>
+                <span className="val">{name || 'YOUR NAME'}</span>
 
-                <div className="ov-lbl">GUEST</div>
-                <div className="ov-name">{name || 'YOUR NAME'}</div>
-
-                <div className="ov-lbl">ISSUED ON</div>
-                <div className="ov-val">{today}</div>
+                <span className="lbl">ISSUED ON</span>
+                <span className="val">{today}</span>
 
                 <div className="sign-row">
-                  <span className="sign-label">SIGN</span>
-                  <span className="sign-x">X</span>
-                  <div className="sign-line"></div>
+                  <span className="lbl">SIGN</span>
+                  <span className="x">X</span>
+                  <div className="line" />
                 </div>
 
               </div>
-
             </div>
 
             <canvas
               ref={canvasRef}
-              className="draw-canvas"
+              className="canvas"
               onMouseDown={startDraw}
               onMouseMove={draw}
               onMouseUp={stopDraw}
               onMouseLeave={stopDraw}
-              onTouchStart={startDraw}
-              onTouchMove={draw}
-              onTouchEnd={stopDraw}
             />
 
-            <button
-              type="button"
-              className="clear-btn"
-              onClick={clearCanvas}
-            >
-              CLEAR
-            </button>
+            <button className="clear" onClick={clearCanvas}>CLEAR</button>
 
           </div>
-
         </div>
 
+        {/* COLORS BELOW */}
+        <div className="field-group">
+          <span className="field-label">Choose your colour</span>
+
+          <div className="color-row">
+            {CARD_COLORS.map(c => (
+              <button
+                key={c.name}
+                type="button"
+                className={`circle ${cardColor === c.name ? 'active' : ''}`}
+                style={{ background: c.color }}
+                onClick={() => setCardColor(c.name)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ERROR */}
         {error && (
-          <div className="error-banner">
-  <span>⚠️</span>
-  <span>{error}</span>
-</div>
+          <div className="error-banner">⚠ {error}</div>
         )}
 
-        <button
-          type="submit"
-          className="btn-primary"
-          disabled={saving}
-        >
+        <button className="submit">
           {saving ? 'Saving…' : 'Sign & Add to Gallery →'}
         </button>
 
@@ -295,87 +211,40 @@ export default function SignPage() {
 
 <style jsx>{`
 
-.back-link{
-  color:#B54E6F;
-  font-family:var(--font-inter);
-  margin-bottom:20px;
-  display:inline-block;
-}
-
-.back-link:hover{
-  opacity:.7;
-}
-
-.sign-header{
-  margin-bottom:36px;
-}
-
-.page-sub{
-  font-size:14px;
-  font-family:var(--font-inter);
-  margin-top:6px;
-  color:#8F8F8F;
-}
-
 .sign-form{
   max-width:420px;
-  margin:0 auto;
+  margin:auto;
   display:flex;
   flex-direction:column;
   gap:28px;
 }
 
-.field-group{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
 .field-label{
   font-size:14px;
-  font-family:var(--font-inter);
-  color:#8F8F8F;
+  color:#aaa;
 }
 
+/* INPUT FIXED */
 .field-input{
-  width:100%;
+  padding:14px;
+  border-radius:12px;
+  background:#1a1a1a;
+  border:1px solid rgba(255,255,255,0.1);
+  color:#fff;
 }
 
-.color-picker{
-  display:flex;
-  justify-content:center;
-  gap:14px;
+.field-input:focus{
+  border-color:#fff;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.2);
 }
 
-.color-circle{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:none;
-  cursor:pointer;
-  transition:all .25s ease;
-  box-shadow:0 0 0 2px rgba(255,255,255,0.08);
+.field-input.error{
+  border-color:#ff6b6b;
 }
 
-.color-circle:hover{
-  transform:scale(1.5);
-}
-
-.color-circle.selected{
-  transform:scale(1.15);
-
-  box-shadow:
-  0 0 0 3px #ffffff,
-  0 0 0 6px rgba(255,255,255,0.25),
-  0 8px 20px rgba(0,0,0,0.4);
-
-  border:1px solid #fff;
-}
-
+/* CARD */
 .card-container{
   position:relative;
-  width:100%;
   aspect-ratio:362/235;
   border-radius:14px;
   overflow:hidden;
@@ -390,10 +259,10 @@ export default function SignPage() {
 .card-overlay{
   position:absolute;
   inset:0;
-  padding:6% 6%;
+  padding:20px;
 }
 
-.card-title-text{
+.card-title{
   font-family:var(--font-serif);
   font-size:22px;
   color:#fff;
@@ -401,103 +270,78 @@ export default function SignPage() {
 }
 
 .card-info{
-  margin-top:30px;
+  margin-top:20px;
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:6px;
 }
 
-.ov-lbl{
-  font-family:var(--font-inter);
+.lbl{
   font-size:12px;
-   font-weight:600;
   color:rgba(255,255,255,.6);
 }
 
-.ov-name{
-  font-family:var(--font-inter);
-  font-size:14px;
-  color:#fff;
-}
-
-.ov-val{
-  font-family:var(--font-inter);
+.val{
   color:#fff;
 }
 
 .sign-row{
-  margin-top:20px;
   display:flex;
   align-items:center;
   gap:6px;
+  margin-top:10px;
 }
 
-.sign-label{
-  font-size:12px;
-  color:rgba(255,255,255,.6);
-}
-
-.sign-x{
-  font-size:11px;
-  color:rgba(255,255,255,.6);
-}
-
-.sign-line{
-   width:160px;
+.line{
+  width:140px;
   height:2px;
-  background:rgba(255,255,255,.5);
+  background:#fff5;
 }
 
-.draw-canvas{
+/* CANVAS */
+.canvas{
   position:absolute;
   inset:0;
-  width:100%;
-  height:100%;
-  z-index:2;
 }
 
-.clear-btn{
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index:3;
-  font-size:12px;
-}
-.error-banner{
-  width:100%;
-  max-width:420px;
-
-  background:rgba(255, 77, 77, 0.12);
-  border:1px solid rgba(255, 77, 77, 0.4);
-
-  color:#ff6b6b;
-
-  font-family:var(--font-inter);
-  font-size:14px;
-  font-weight:500;
-
-  padding:12px 14px;
-  border-radius:10px;
-
+/* COLORS */
+.color-row{
   display:flex;
-  align-items:center;
-  gap:10px;
-
-  backdrop-filter:blur(6px);
-
-  animation:shake .25s ease;
+  justify-content:center;
+  gap:14px;
 }
 
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-3px)}
-  50%{transform:translateX(3px)}
-  75%{transform:translateX(-2px)}
-  100%{transform:translateX(0)}
+.circle{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:none;
+}
+
+.circle.active{
+  box-shadow:0 0 0 3px #fff;
+  transform:scale(1.1);
+}
+
+/* ERROR */
+.error-banner{
+  background:#ff000020;
+  border:1px solid #ff6b6b;
+  padding:12px;
+  border-radius:10px;
+  color:#ff6b6b;
+}
+
+/* BUTTON */
+.submit{
+  padding:14px;
+  border-radius:12px;
+  background:#333;
+  color:#fff;
 }
 
 `}</style>
 
-</main>
+    </main>
   );
 }
