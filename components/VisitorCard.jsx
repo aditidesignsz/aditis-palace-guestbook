@@ -29,17 +29,9 @@ export default function VisitorCard({ visitor }) {
         style={{ backgroundImage: `url(${theme.image})` }}
       >
 
-        {/* HEADER */}
-        <div className="card-header">
-
-          <div className="card-logo">
-            <img src="/favicon.ico" alt="logo" />
-          </div>
-
-          <div className="card-title">
-            Aditi's palace
-          </div>
-
+        {/* TITLE ONLY (logo removed) */}
+        <div className="card-title">
+          Aditi's palace
         </div>
 
         {/* BODY */}
@@ -60,7 +52,6 @@ export default function VisitorCard({ visitor }) {
           </div>
 
           <div className="sign-row">
-
             <span className="lbl">SIGN</span>
             <span className="sign-x">X</span>
 
@@ -73,7 +64,6 @@ export default function VisitorCard({ visitor }) {
             )}
 
             <div className="sig-line" />
-
           </div>
 
         </div>
@@ -108,55 +98,24 @@ export default function VisitorCard({ visitor }) {
   overflow:hidden;
 }
 
-/* SINGLE SHINE EFFECT */
+/* ✨ SINGLE CLEAN SHINE */
 
 .card::after{
   content:"";
   position:absolute;
   inset:0;
-
   background:linear-gradient(
     120deg,
     transparent 30%,
     rgba(255,255,255,0.35) 50%,
     transparent 70%
   );
-
   transform:translateX(-120%);
   transition:transform .8s ease;
 }
 
 .card-wrapper:hover .card::after{
   transform:translateX(120%);
-}
-
-/* HEADER */
-
-.card-header{
-  position:relative;
-  display:flex;
-  align-items:flex-start;
-}
-
-/* LOGO */
-
-.card-logo{
-  position:absolute;
-  top:0;
-  right:0;
-  z-index:2;
-}
-
-.card-logo img{
-  width:36px; /* increased for favicon */
-  height:auto;
-  opacity:0.95;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-  transition: transform .2s ease;
-}
-
-.card-wrapper:hover .card-logo img{
-  transform: scale(1.08);
 }
 
 /* TITLE */
@@ -174,13 +133,14 @@ export default function VisitorCard({ visitor }) {
 .card-body{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:8px; /* better spacing */
   width:54%;
 }
 
 .card-field{
   display:flex;
   flex-direction:column;
+  gap:2px;
 }
 
 .lbl{
@@ -208,7 +168,7 @@ export default function VisitorCard({ visitor }) {
   display:flex;
   align-items:center;
   gap:6px;
-  margin-top:6%;
+  margin-top:10%;
   position:relative;
   height:24px;
 }
@@ -223,7 +183,7 @@ export default function VisitorCard({ visitor }) {
   position:absolute;
   left:45px;
   bottom:10px;
-  width:160px;
+  width:180px; /* slightly bigger */
   height:auto;
   object-fit:contain;
   filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));
@@ -233,7 +193,7 @@ export default function VisitorCard({ visitor }) {
   position:absolute;
   bottom:0;
   left:26px;
-  width:130px;
+  width:120px; /* reduced line width */
   border-bottom:1px solid rgba(255,255,255,.35);
 }
 
