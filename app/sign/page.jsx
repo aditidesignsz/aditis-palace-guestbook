@@ -270,3 +270,10 @@ return (
     </button>
 
   </form>
+  <style jsx>{`
+/* your styles */
+`}</style>
+
+</main>
+  );
+}
