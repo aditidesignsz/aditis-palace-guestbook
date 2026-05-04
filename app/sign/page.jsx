@@ -124,13 +124,14 @@ export default function SignPage() {
 
       <div className="sign-header">
         <h1 className="page-heading">
-          Sign the Guestbook
+        Autograph Time!
         </h1>
       </div>
 
       <form onSubmit={handleSubmit} className="sign-form" noValidate>
 
         {/* CHANGE 1 — NAME label inline, 16px white */}
+    <p className="visitor-msg">hi visitor, thanks for visiting — leave your mark ✦</p> 
         <div className="name-row">
           <span className="name-lbl">NAME:</span>
           <input
@@ -255,7 +256,7 @@ export default function SignPage() {
 }
 
 .name-lbl{
-  font-family:var(--font-mono);
+  font-family:var(--font-Inter);
   font-size:16px;
   color:#ffffff;
   white-space:nowrap;
@@ -392,6 +393,12 @@ export default function SignPage() {
   right:10px;
   z-index:3;
   font-size:12px;
+}
+.visitor-msg {
+  font-family: var(--font-inter);
+  font-size: 13px;
+  color: var(--color-muted);
+  margin: 0;
 }
 
 `}</style>
