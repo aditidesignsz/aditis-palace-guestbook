@@ -33,19 +33,24 @@ export default function SignPage() {
   const today = formatDate(new Date());
 
   useEffect(() => {
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ratio = window.devicePixelRatio || 1;
+
     canvas.width = canvas.offsetWidth * ratio;
     canvas.height = canvas.offsetHeight * ratio;
 
     const ctx = canvas.getContext('2d');
     ctx.scale(ratio, ratio);
+
   }, []);
 
   function getPos(e, canvas) {
+
     const rect = canvas.getBoundingClientRect();
+
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
@@ -62,24 +67,28 @@ export default function SignPage() {
   }
 
   function draw(e) {
+
     e.preventDefault();
     if (!isDrawing.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+
     const pos = getPos(e, canvas);
 
     ctx.beginPath();
     ctx.moveTo(lastPos.current.x, lastPos.current.y);
     ctx.lineTo(pos.x, pos.y);
 
-    ctx.strokeStyle = '#fff';
+    ctx.strokeStyle = 'rgba(255,255,255,255)';
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
 
     ctx.stroke();
 
     lastPos.current = pos;
+
     setHasDrawn(true);
   }
 
@@ -88,19 +97,25 @@ export default function SignPage() {
   }
 
   function clearCanvas() {
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     setHasDrawn(false);
   }
 
   async function handleSubmit(e) {
+
     e.preventDefault();
+
     setError('');
 
     if (!name.trim()) {
       setError('Please enter your name.');
       return;
+  
     }
 
     const signature = canvasRef.current.toDataURL('image/png');
@@ -108,6 +123,7 @@ export default function SignPage() {
     setSaving(true);
 
     try {
+
       const res = await fetch('/api/visit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -125,12 +141,15 @@ export default function SignPage() {
       window.location.href = '/';
 
     } catch (err) {
+
       setError(err.message);
       setSaving(false);
+
     }
   }
 
   return (
+
     <main className="page-container">
 
       <Link href="/" className="back-link">
@@ -138,13 +157,21 @@ export default function SignPage() {
       </Link>
 
       <div className="sign-header">
-        <h1 className="page-heading">Sign the Guestbook</h1>
+
+        <h1 className="page-heading">
+          Sign the Guestbook
+        </h1>
+
+    
       </div>
 
       <form onSubmit={handleSubmit} className="sign-form" noValidate>
 
         <div className="field-group">
-          <label className="field-label">Your name</label>
+
+          <label className="field-label">
+            Your name
+          </label>
 
           <input
             type="text"
@@ -155,40 +182,60 @@ export default function SignPage() {
             maxLength={60}
             disabled={saving}
           />
+
         </div>
 
         <div className="field-group">
-          <span className="field-label">Choose your colour</span>
+
+          <span className="field-label">
+            Choose your colour
+          </span>
 
           <div className="color-picker">
+
             {CARD_COLORS.map((color) => (
+
               <button
                 key={color.name}
                 type="button"
-                className={`color-circle ${cardColor === color.name ? 'selected' : ''}`}
+                className={
+                  'color-circle ' +
+                  (cardColor === color.name ? 'selected' : '')
+                }
                 onClick={() => setCardColor(color.name)}
                 style={{ backgroundColor: color.color }}
               />
+
             ))}
+
           </div>
+
         </div>
 
         <div className="field-group">
-          <span className="field-label">Sign on your card</span>
+
+          <span className="field-label">
+            Sign on your card
+          </span>
 
           <div className="card-container">
 
             <div
               className="card-bg"
               style={{
-                backgroundImage: `url(/cards/card-${cardColor}.png)`
+                backgroundImage:
+                  `url(/cards/card-${cardColor}.png)`
               }}
             />
 
             <div className="card-overlay">
-              <div className="card-title-text">Aditi's Palace</div>
+
+              <div className="card-title-text">
+                Aditi's Palace
+              </div>
 
               <div className="card-info">
+
                 <div className="ov-lbl">GUEST</div>
                 <div className="ov-name">{name || 'YOUR NAME'}</div>
 
@@ -200,7 +247,9 @@ export default function SignPage() {
                   <span className="sign-x">X</span>
                   <div className="sign-line"></div>
                 </div>
+
               </div>
+
             </div>
 
             <canvas
@@ -224,11 +273,12 @@ export default function SignPage() {
             </button>
 
           </div>
+
         </div>
 
         {error && (
           <div className="error-banner">
-            ⚠️ {error}
+            {error}
           </div>
         )}
 
@@ -242,10 +292,179 @@ export default function SignPage() {
 
       </form>
 
-      <style jsx>{`
-      /* your styles */
-      `}</style>
+<style jsx>{`
 
-    </main>
+.back-link{
+  color:#B54E6F;
+  font-family:var(--font-inter);
+  margin-bottom:20px;
+  display:inline-block;
+}
+
+.back-link:hover{
+  opacity:.7;
+}
+
+.sign-header{
+  margin-bottom:36px;
+}
+
+.page-sub{
+  font-size:14px;
+  font-family:var(--font-inter);
+  margin-top:6px;
+  color:#8F8F8F;
+}
+
+.sign-form{
+  max-width:420px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.field-group{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.field-label{
+  font-size:14px;
+  font-family:var(--font-inter);
+  color:#8F8F8F;
+}
+
+.field-input{
+  width:100%;
+}
+
+.color-picker{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+}
+
+.color-circle{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  transition:all .25s ease;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.08);
+}
+
+.color-circle:hover{
+  transform:scale(1.5);
+}
+
+.color-circle.selected{
+  transform:scale(1.15);
+
+  box-shadow:
+  0 0 0 3px #ffffff,
+  0 0 0 6px rgba(255,255,255,0.25),
+  0 8px 20px rgba(0,0,0,0.4);
+
+  border:1px solid #fff;
+}
+
+.card-container{
+  position:relative;
+  width:100%;
+  aspect-ratio:362/235;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.card-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+}
+
+.card-overlay{
+  position:absolute;
+  inset:0;
+  padding:6% 6%;
+}
+
+.card-title-text{
+  font-family:var(--font-serif);
+  font-size:22px;
+  color:#fff;
+  text-align:center;
+}
+
+.card-info{
+  margin-top:30px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.ov-lbl{
+  font-family:var(--font-inter);
+  font-size:12px;
+   font-weight:600;
+  color:rgba(255,255,255,.6);
+}
+
+.ov-name{
+  font-family:var(--font-inter);
+  font-size:14px;
+  color:#fff;
+}
+
+.ov-val{
+  font-family:var(--font-inter);
+  color:#fff;
+}
+
+.sign-row{
+  margin-top:20px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.sign-label{
+  font-size:12px;
+  color:rgba(255,255,255,.6);
+}
+
+.sign-x{
+  font-size:11px;
+  color:rgba(255,255,255,.6);
+}
+
+.sign-line{
+   width:160px;
+  height:2px;
+  background:rgba(255,255,255,.5);
+}
+
+.draw-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:2;
+}
+
+.clear-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:3;
+  font-size:12px;
+}
+
+`}</style>
+
+</main>
   );
 }
