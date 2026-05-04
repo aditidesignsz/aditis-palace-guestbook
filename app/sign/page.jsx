@@ -278,8 +278,9 @@ export default function SignPage() {
 
         {error && (
           <div className="error-banner">
-            {error}
-          </div>
+  <span>⚠️</span>
+  <span>{error}</span>
+</div>
         )}
 
         <button
@@ -461,6 +462,38 @@ export default function SignPage() {
   right:10px;
   z-index:3;
   font-size:12px;
+}
+.error-banner{
+  width:100%;
+  max-width:420px;
+
+  background:rgba(255, 77, 77, 0.12);
+  border:1px solid rgba(255, 77, 77, 0.4);
+
+  color:#ff6b6b;
+
+  font-family:var(--font-inter);
+  font-size:14px;
+  font-weight:500;
+
+  padding:12px 14px;
+  border-radius:10px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  backdrop-filter:blur(6px);
+
+  animation:shake .25s ease;
+}
+
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-3px)}
+  50%{transform:translateX(3px)}
+  75%{transform:translateX(-2px)}
+  100%{transform:translateX(0)}
 }
 
 `}</style>
