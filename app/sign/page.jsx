@@ -131,7 +131,7 @@ export default function SignPage() {
       <form onSubmit={handleSubmit} className="sign-form" noValidate>
 
         {/* CHANGE 1 — NAME label inline, 16px white */}
-    <p className="visitor-msg">hi visitor, thanks for visiting — leave your mark ✦</p> 
+    <p className="visitor-msg">hiiee thanks for visiting, leave your mark :) </p> 
         <div className="name-row">
           <span className="name-lbl">NAME:</span>
           <input
@@ -396,8 +396,8 @@ export default function SignPage() {
 }
 .visitor-msg {
   font-family: var(--font-inter);
-  font-size: 13px;
-  color: var(--color-muted);
+  font-size: 14px;
+ color:#8F8F8F;
   margin: 0;
 }
 
