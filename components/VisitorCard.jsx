@@ -175,26 +175,31 @@ export default function VisitorCard({ visitor }) {
 
 .sign-x{
   font-family:var(--font-mono);
-  font-size:11px;
+  font-size:12px;
   color:rgba(255,255,255,.4);
 }
 
 .sig-img{
   position:absolute;
-  left:45px;
-  bottom:10px;
-  width:180px; /* slightly bigger */
+  left:30px;
+  bottom:12px;
+
+  width:120%;     /* bigger */
+  max-width:220px;
+
   height:auto;
   object-fit:contain;
-  filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));
+
+  transform:scale(1.2);   /* extra boost */
 }
 
 .sig-line{
   position:absolute;
   bottom:0;
-  left:26px;
-  width:120px; /* reduced line width */
-  border-bottom:1px solid rgba(255,255,255,.35);
+  left:30px;
+
+  width:180px;   /* longer line */
+  border-bottom:2px solid rgba(255,255,255,0.5);
 }
 
 `}</style>
