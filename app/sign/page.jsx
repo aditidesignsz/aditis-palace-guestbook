@@ -201,10 +201,11 @@ export default function SignPage() {
         </div>
 
         {error && (
-          <div className="error-banner">
-            {error}
-          </div>
-        )}
+  <div className="error-banner">
+    <span className="error-icon">⚠</span>
+    <span>Please enter your name before signing.</span>
+  </div>
+)}
 
         <button
           type="submit"
@@ -400,6 +401,47 @@ export default function SignPage() {
  color:#8F8F8F;
   margin: 0;
 }
+.error-banner{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:16px 18px;
+
+  background:rgba(255,59,59,0.14);
+  border:1px solid rgba(255,80,80,0.45);
+
+  border-radius:14px;
+
+  color:#ff8f8f;
+
+  font-family:var(--font-inter);
+  font-size:15px;
+  font-weight:600;
+
+  box-shadow:
+    0 0 0 1px rgba(255,0,0,0.08),
+    0 8px 24px rgba(255,0,0,0.12);
+
+  animation:errorPop .25s ease;
+}
+
+.error-icon{
+  font-size:18px;
+  line-height:1;
+}
+
+@keyframes errorPop{
+  0%{
+    transform:translateY(6px);
+    opacity:0;
+  }
+
+  100%{
+    transform:translateY(0);
+    opacity:1;
+  }
 
 `}</style>
 
